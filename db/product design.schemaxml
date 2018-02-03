@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="utf8" collation="utf8_unicode_ci">bongyeu_vn</database>
+</source>
+<canvas zoom="80">
+<tables>
+<table name="product_option" view="colnames">
+<left>1327</left>
+<top>34</top>
+<width>152</width>
+<height>121</height>
+<sql_create_table>CREATE TABLE `product_option` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(511) COLLATE utf8_unicode_ci NOT NULL,
+  `label` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `group_id` int(11) NOT NULL,
+  `sort_order` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `group_id` (`group_id`),
+  CONSTRAINT `product_option_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `product_option_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="product_option_group" view="colnames">
+<left>1513</left>
+<top>34</top>
+<width>160</width>
+<height>115</height>
+<sql_create_table>CREATE TABLE `product_option_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(511) COLLATE utf8_unicode_ci NOT NULL,
+  `label` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sort_order` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="product" view="colnames">
+<left>270</left>
+<top>252</top>
+<width>131</width>
+<height>286</height>
+<sql_create_table>CREATE TABLE `product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `label` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `old_slugs` varchar(2000) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `price` int(11) DEFAULT '0',
+  `original_price` int(11) DEFAULT '0',
+  `image` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `banner` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image_path` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `long_description` text COLLATE utf8_unicode_ci,
+  `details` text COLLATE utf8_unicode_ci,
+  `content` text COLLATE utf8_unicode_ci,
+  `page_title` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `h1` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `meta_title` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `meta_description` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `meta_keywords` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `is_hot` tinyint(1) DEFAULT NULL,
+  `is_active` tinyint(1) DEFAULT NULL,
+  `status` tinyint(2) DEFAULT NULL,
+  `sort_order` int(11) DEFAULT NULL,
+  `view_count` int(11) DEFAULT '0',
+  `like_count` int(11) DEFAULT '0',
+  `share_count` int(11) DEFAULT '0',
+  `comment_count` int(11) DEFAULT '0',
+  `published_at` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL,
+  `updated_at` int(11) DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `updated_by` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `auth_alias` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `available_quantity` int(11) DEFAULT '0',
+  `order_quantity` int(11) DEFAULT '0',
+  `sold_quantity` int(11) DEFAULT '0',
+  `total_quantity` int(11) DEFAULT '0',
+  `total_revenue` int(11) DEFAULT '0',
+  `review_score` int(11) DEFAULT '0',
+  `manufacturer` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `color` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `malterial` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `style` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `use_duration` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `manufacturing_date` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `size` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `weight` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ingredient` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `model` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `type` tinyint(2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `slug_UNIQUE` (`slug`),
+  KEY `category_id` (`category_id`),
+  CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `product_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="product_customization" view="colnames">
+<left>866</left>
+<top>229</top>
+<width>169</width>
+<height>254</height>
+<sql_create_table>CREATE TABLE `product_customization` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `name` varchar(511) COLLATE utf8_unicode_ci NOT NULL,
+  `label` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `review_score` int(11) DEFAULT '0',
+  `order_quantity` int(11) DEFAULT '0',
+  `sold_quantity` int(11) DEFAULT '0',
+  `available_quantity` int(11) DEFAULT '0',
+  `total_quantity` int(11) DEFAULT '0',
+  `price` int(11) DEFAULT '0',
+  `original_price` int(11) DEFAULT '0',
+  `total_revenue` int(11) DEFAULT '0',
+  `sort_order` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `product_id` (`product_id`),
+  CONSTRAINT `product_customization_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="product_customization_to_option" view="colnames">
+<left>1059</left>
+<top>32</top>
+<width>222</width>
+<height>98</height>
+<sql_create_table>CREATE TABLE `product_customization_to_option` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `customization_id` int(11) NOT NULL,
+  `option_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `statistic_id` (`customization_id`),
+  KEY `option_id` (`option_id`),
+  CONSTRAINT `product_customization_to_option_ibfk_1` FOREIGN KEY (`customization_id`) REFERENCES `product_customization` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `product_customization_to_option_ibfk_2` FOREIGN KEY (`option_id`) REFERENCES `product_option` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="product_tracking" view="colnames">
+<left>493</left>
+<top>51</top>
+<width>216</width>
+<height>193</height>
+<sql_create_table>CREATE TABLE `product_tracking` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `customization_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `order_quantity` int(11) DEFAULT NULL,
+  `sold_quantity` int(11) DEFAULT NULL,
+  `available_quantity` int(11) DEFAULT NULL,
+  `total_quantity` int(11) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `original_price` int(11) DEFAULT NULL,
+  `created_at` int(11) DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `customization_id` (`customization_id`),
+  KEY `product_id` (`product_id`),
+  CONSTRAINT `product_tracking_ibfk_1` FOREIGN KEY (`customization_id`) REFERENCES `product_customization` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `product_tracking_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="product_category" view="colnames">
+<left>424</left>
+<top>573</top>
+<width>146</width>
+<height>190</height>
+<sql_create_table>CREATE TABLE `product_category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `label` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
+  `slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `old_slugs` varchar(2000) COLLATE utf8_unicode_ci DEFAULT '',
+  `parent_id` int(11) DEFAULT NULL,
+  `description` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `long_description` text COLLATE utf8_unicode_ci,
+  `page_title` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `h1` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `meta_title` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `meta_description` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `meta_keywords` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `image` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `banner` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `image_path` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `is_hot` tinyint(1) DEFAULT NULL,
+  `is_active` tinyint(1) DEFAULT NULL,
+  `status` tinyint(2) DEFAULT NULL,
+  `sort_order` int(11) DEFAULT NULL,
+  `created_at` int(11) NOT NULL,
+  `updated_at` int(11) DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `updated_by` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `type` tinyint(2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `slug` (`slug`),
+  KEY `fk2_parent_idx` (`parent_id`),
+  CONSTRAINT `product_category_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `product_category` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="purchase_order" view="colnames">
+<left>1332</left>
+<top>431</top>
+<width>175</width>
+<height>334</height>
+<sql_create_table>CREATE TABLE `purchase_order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` tinyint(2) DEFAULT NULL,
+  `created_at` int(11) DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `customer_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `customer_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `customer_phone_number` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `customer_address` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `customer_address_2` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `customer_city` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `customer_note` varchar(2000) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_note` varchar(2000) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `updated_at` int(11) DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `shipping_fee` int(11) DEFAULT NULL,
+  `shipping_duration` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tax` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `customer_id` (`customer_id`),
+  CONSTRAINT `purchase_order_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="purchase_order_detail" view="colnames">
+<left>1059</left>
+<top>522</top>
+<width>171</width>
+<height>286</height>
+<sql_create_table>CREATE TABLE `purchase_order_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `purchase_order_id` int(11) NOT NULL,
+  `product_customization_id` int(11) DEFAULT NULL,
+  `product_id` int(11) NOT NULL,
+  `purchase_order_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `product_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `product_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `product_description` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `product_color` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `product_style` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `product_size` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `product_weight` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `product_model` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `unit_price` int(11) NOT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `discount` float DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `purchase_order_detail_ibfk_1` (`purchase_order_id`),
+  KEY `purchase_order_detail_ibfk_2` (`product_id`),
+  KEY `product_customization_id` (`product_customization_id`),
+  CONSTRAINT `purchase_order_detail_ibfk_1` FOREIGN KEY (`purchase_order_id`) REFERENCES `purchase_order` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `purchase_order_detail_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `purchase_order_detail_ibfk_3` FOREIGN KEY (`product_customization_id`) REFERENCES `product_customization` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="product_to_tag" view="colnames">
+<left>39</left>
+<top>471</top>
+<width>130</width>
+<height>99</height>
+<sql_create_table>CREATE TABLE `product_to_tag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `tag_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `product_id` (`product_id`),
+  KEY `product_category_id` (`tag_id`),
+  CONSTRAINT `product_to_tag_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `product_to_tag_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="tag" view="colnames">
+<left>193</left>
+<top>614</top>
+<width>165</width>
+<height>245</height>
+<sql_create_table>CREATE TABLE `tag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `label` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
+  `slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `old_slugs` varchar(2000) COLLATE utf8_unicode_ci DEFAULT '',
+  `page_title` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `h1` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `meta_title` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `meta_description` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `meta_keywords` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `description` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `sort_order` int(11) DEFAULT NULL,
+  `long_description` text COLLATE utf8_unicode_ci,
+  `image` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `image_path` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `is_active` tinyint(1) DEFAULT NULL,
+  `is_hot` tinyint(1) DEFAULT NULL,
+  `status` smallint(2) DEFAULT NULL,
+  `created_at` int(11) NOT NULL,
+  `created_by` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `updated_at` int(11) DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `type` tinyint(2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="product_related" view="colnames">
+<left>26</left>
+<top>293</top>
+<width>148</width>
+<height>99</height>
+<sql_create_table>CREATE TABLE `product_related` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `related_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `product_id` (`product_id`),
+  KEY `related_id` (`related_id`),
+  CONSTRAINT `product_related_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `product_related_ibfk_2` FOREIGN KEY (`related_id`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="product_image" view="colnames">
+<left>469</left>
+<top>405</top>
+<width>140</width>
+<height>140</height>
+<sql_create_table>CREATE TABLE `product_image` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `image` varchar(511) COLLATE utf8_unicode_ci NOT NULL,
+  `image_path` varchar(511) COLLATE utf8_unicode_ci NOT NULL,
+  `color` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sort_order` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_product_id_idx` (`product_id`),
+  CONSTRAINT `product_image_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="product_attribute" view="colnames">
+<left>283</left>
+<top>25</top>
+<width>137</width>
+<height>126</height>
+<sql_create_table>CREATE TABLE `product_attribute` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) NOT NULL,
+  `name` varchar(511) COLLATE utf8_unicode_ci NOT NULL,
+  `label` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sort_order` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `group_id` (`group_id`),
+  CONSTRAINT `product_attribute_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `product_attribute_group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="product_attribute_group" view="colnames">
+<left>10</left>
+<top>11</top>
+<width>166</width>
+<height>99</height>
+<sql_create_table>CREATE TABLE `product_attribute_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(511) COLLATE utf8_unicode_ci NOT NULL,
+  `label` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sort_order` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="product_to_attribute" view="colnames">
+<left>13</left>
+<top>123</top>
+<width>167</width>
+<height>99</height>
+<sql_create_table>CREATE TABLE `product_to_attribute` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `attribute_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `product_id` (`product_id`),
+  KEY `attribute_id` (`attribute_id`),
+  CONSTRAINT `product_to_attribute_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `product_to_attribute_ibfk_2` FOREIGN KEY (`attribute_id`) REFERENCES `product_attribute` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="customer" view="colnames">
+<left>1573</left>
+<top>431</top>
+<width>168</width>
+<height>245</height>
+<sql_create_table>CREATE TABLE `customer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password_hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `auth_key` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `phone_number` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `firstname` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `lastname` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dob` int(11) DEFAULT NULL,
+  `gender` tinyint(1) DEFAULT NULL,
+  `image` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image_path` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `language_id` int(11) DEFAULT NULL,
+  `zip_postal_code` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '0',
+  `status` smallint(6) NOT NULL DEFAULT '10',
+  `created_at` int(11) NOT NULL,
+  `updated_at` int(11) DEFAULT NULL,
+  `total_purchase_orders` int(11) DEFAULT '0',
+  `total_purchase_products` int(11) DEFAULT '0',
+  `total_purchase_value` int(11) DEFAULT '0',
+  `activation_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username_UNIQUE` (`username`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
+  UNIQUE KEY `password_reset_token_UNIQUE` (`password_reset_token`),
+  KEY `fk7_language_id_idx` (`language_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="product_customization_to_image" view="colnames">
+<left>634</left>
+<top>527</top>
+<width>208</width>
+<height>99</height>
+<sql_create_table>CREATE TABLE `product_customization_to_image` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `customization_id` int(11) NOT NULL,
+  `image_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `customization_id` (`customization_id`),
+  KEY `image_id` (`image_id`),
+  CONSTRAINT `product_customization_to_image_ibfk_1` FOREIGN KEY (`customization_id`) REFERENCES `product_customization` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `product_customization_to_image_ibfk_2` FOREIGN KEY (`image_id`) REFERENCES `product_image` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>

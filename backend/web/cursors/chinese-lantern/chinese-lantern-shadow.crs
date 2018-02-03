@@ -1,0 +1,24 @@
+﻿[UpArrow]
+Path=Alternate.cur
+
+[Wait]
+Path=Busy 2.ani
+
+[NWPen]
+Path=Handwriting.ani
+
+[Help]
+Path=Help.ani
+
+[Hand]
+Path=Link.ani
+
+[SizeAll]
+Path=Move.ani
+
+[Arrow]
+Path=Normal.ani
+
+[AppStarting]
+Path=Working.ani
+

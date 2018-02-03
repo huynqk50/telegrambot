@@ -1,0 +1,24 @@
+﻿[Arrow]
+Path=Button.cur
+
+[SizeNESW]
+Path=Diagonal NE.cur
+
+[SizeNWSE]
+Path=Diagonal NW.cur
+
+[SizeWE]
+Path=Horizontal WE.cur
+
+[Crosshair]
+Path=Precision.cur
+
+[IBeam]
+Path=Text.cur
+
+[No]
+Path=Unavailable.ani
+
+[SizeNS]
+Path=Vertical NS.cur
+

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="latin1" collation="latin1_swedish_ci">bongyeu_vn</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="article" view="colnames">
+<left>107</left>
+<top>32</top>
+<width>144</width>
+<height>306</height>
+<sql_create_table>CREATE TABLE `article` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `label` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `old_slugs` varchar(2000) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `content` text COLLATE utf8_unicode_ci,
+  `description` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image_path` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `page_title` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `meta_title` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `meta_keywords` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `meta_description` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `h1` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `view_count` int(11) DEFAULT '0',
+  `like_count` int(11) DEFAULT '0',
+  `comment_count` int(11) DEFAULT '0',
+  `share_count` int(11) DEFAULT '0',
+  `created_at` int(11) NOT NULL,
+  `updated_at` int(11) DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `updated_by` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `auth_alias` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `is_hot` tinyint(1) DEFAULT NULL,
+  `sort_order` int(11) DEFAULT NULL,
+  `status` tinyint(2) DEFAULT NULL,
+  `long_description` text COLLATE utf8_unicode_ci,
+  `published_at` int(11) NOT NULL,
+  `is_active` tinyint(1) DEFAULT NULL,
+  `type` tinyint(2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `slug` (`slug`),
+  KEY `category_id` (`category_id`),
+  CONSTRAINT `article_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `article_category` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=942 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="article_category" view="colnames">
+<left>310</left>
+<top>301</top>
+<width>152</width>
+<height>306</height>
+<sql_create_table>CREATE TABLE `article_category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `label` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
+  `slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `old_slugs` varchar(2000) COLLATE utf8_unicode_ci DEFAULT '',
+  `parent_id` int(11) DEFAULT NULL,
+  `description` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `long_description` text COLLATE utf8_unicode_ci,
+  `meta_title` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `meta_description` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `meta_keywords` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `h1` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `page_title` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `image` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `banner` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `image_path` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `status` tinyint(2) DEFAULT NULL,
+  `is_hot` tinyint(1) DEFAULT NULL,
+  `sort_order` int(11) DEFAULT NULL,
+  `created_at` int(11) NOT NULL,
+  `updated_at` int(11) DEFAULT NULL,
+  `created_by` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `updated_by` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `is_active` tinyint(1) DEFAULT NULL,
+  `type` tinyint(2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `slug` (`slug`),
+  KEY `fk_parent_idx` (`parent_id`),
+  CONSTRAINT `fk_parent` FOREIGN KEY (`parent_id`) REFERENCES `article_category` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="article_to_tag" view="colnames">
+<left>576</left>
+<top>31</top>
+<width>174</width>
+<height>124</height>
+<sql_create_table>CREATE TABLE `article_to_tag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `article_id` int(11) NOT NULL,
+  `tag_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQUE` (`article_id`,`tag_id`),
+  KEY `fk_tag_id_idx` (`tag_id`),
+  CONSTRAINT `fk2_article_id` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_tag_id` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="tag" view="colnames">
+<left>794</left>
+<top>78</top>
+<width>144</width>
+<height>306</height>
+<sql_create_table>CREATE TABLE `tag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `label` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
+  `slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `old_slugs` varchar(2000) COLLATE utf8_unicode_ci DEFAULT '',
+  `page_title` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `h1` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `meta_title` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `meta_description` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `meta_keywords` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `description` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `sort_order` int(11) DEFAULT NULL,
+  `long_description` text COLLATE utf8_unicode_ci,
+  `image` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `image_path` varchar(511) COLLATE utf8_unicode_ci DEFAULT '',
+  `is_active` tinyint(1) DEFAULT NULL,
+  `is_hot` tinyint(1) DEFAULT NULL,
+  `status` smallint(2) DEFAULT NULL,
+  `created_at` int(11) NOT NULL,
+  `created_by` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `updated_at` int(11) DEFAULT NULL,
+  `updated_by` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `type` tinyint(2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+<table name="article_related" view="colnames">
+<left>380</left>
+<top>139</top>
+<width>125</width>
+<height>124</height>
+<sql_create_table>CREATE TABLE `article_related` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `article_id` int(11) NOT NULL,
+  `related_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `article_id` (`article_id`),
+  KEY `related_id` (`related_id`),
+  CONSTRAINT `article_related_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `article_related_ibfk_2` FOREIGN KEY (`related_id`) REFERENCES `article` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>
