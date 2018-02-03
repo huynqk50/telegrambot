@@ -56,8 +56,11 @@ class BaseController extends Controller {
         $this->md_scr = $this->scr == 'md';
         $this->lg_scr = $this->scr == 'lg';
     }
-    
     public function beforeAction($action) {
+        parent::beforeAction($action);
+        
+    }
+    public function beforeAction1($action) {
         parent::beforeAction($action);
 
         if (in_array(Yii::$app->requestedRoute, [
