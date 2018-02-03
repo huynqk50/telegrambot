@@ -58,6 +58,7 @@ class BaseController extends Controller {
     }
     public function beforeAction($action) {
         parent::beforeAction($action);
+        return true;
         
     }
     public function beforeAction1($action) {
