@@ -27,7 +27,8 @@
         "janisto/yii2-timepicker": "*",
         "kartik-v/yii2-widget-select2": "*",
         "udokmeci/yii2-phone-validator" : "dev-master",
-        "himiklab/yii2-recaptcha-widget" : "*"
+        "himiklab/yii2-recaptcha-widget" : "*",
+        "longman/telegram-bot": "^0.52.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
