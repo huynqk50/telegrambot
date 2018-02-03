@@ -21,7 +21,7 @@ $this->head();
 <body class="homepage">
 <?php
 $this->beginBody();
-require_once 'header.php';
+//require_once 'header.php';
 if (!in_array(Yii::$app->controller->id, ['site'])) {
 //    echo $this->render('//modules/breadcrumb');
 }
@@ -30,9 +30,9 @@ if (!in_array(Yii::$app->controller->id, ['site'])) {
         <?= $content ?>
 
 <?php
-require_once 'footer.php';
+//require_once 'footer.php';
 $this->endBody();
-require_once 'js.php';
+//require_once 'js.php';
 ?>
 </body>
 </html>
