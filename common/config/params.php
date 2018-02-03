@@ -31,4 +31,10 @@ return [
     
     'enable_cache' => false,
     'cache_duration' => 3600,
+    'telegram_db' => [
+        'host'     => '192.168.11.16',
+        'user'     => 'huynq',
+        'password' => 'sdf30KD)#ejr',
+        'database' => 'telegram',
+    ]
 ];

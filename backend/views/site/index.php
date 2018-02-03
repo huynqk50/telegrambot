@@ -69,12 +69,7 @@ $commands_paths = [
 //  __DIR__ . '/Commands/',
 ];
 // Enter your MySQL database credentials
-$mysql_credentials = [
-    'host'     => 'localhost',
-    'user'     => 'root',
-    'password' => 'Lk3w*6ps5-otar',
-    'database' => 'telegram',
-];
+$mysql_credentials = Yii::$app->params['telegram_db'];
 
 try {
     // Create Telegram API object
@@ -114,19 +109,19 @@ try {
     if ($server_response->isOk()) {
         $update_count = count($server_response->getResult());
         echo date('Y-m-d H:i:s', time()) . ' - Processed ' . $update_count . ' updates';
-//        echo (var_export($server_response, true));
-        foreach ($server_response->getResult() as  $r) {
-            
-            if (is_a($r, '\Longman\TelegramBot\Entities\Update')) {
-                 $message = $r->getMessage();
-                 if ($message->getChat() && $message->getChat()->id == $sourceChatId) {
-                     Request::initialize($telegram);
-                    $response = Request::sendMessage(['chat_id' => $desChatId, 'text' => $message->getText()]);
-                 }
-            } else {
-                echo "object is not type update";
-            }
-        }
+        echo (var_export($server_response->toJson(), true));
+//        foreach ($server_response->getResult() as  $r) {
+//            
+//            if (is_a($r, '\Longman\TelegramBot\Entities\Update')) {
+//                 $message = $r->getMessage();
+//                 if ($message->getChat() && $message->getChat()->id == $sourceChatId) {
+//                     Request::initialize($telegram);
+//                    $response = Request::sendMessage(['chat_id' => $desChatId, 'text' => $message->getText()]);
+//                 }
+//            } else {
+//                echo "object is not type update";
+//            }
+//        }
     } else {
         echo date('Y-m-d H:i:s', time()) . ' - Failed to fetch updates' . PHP_EOL;
         echo $server_response->printError();
