@@ -3,6 +3,6 @@ use frontend\models\Article;
 use frontend\models\ArticleCategory;
 
 
-echo $this->render('//modules/slideshow');
-
+//echo $this->render('//modules/slideshow');
+echo "hello";
 ?>
